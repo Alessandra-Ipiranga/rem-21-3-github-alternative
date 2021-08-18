@@ -1,5 +1,6 @@
 package de.neuefische.rem_213_github.backend.service;
 
+import de.neuefische.rem_213_github.backend.api.User;
 import de.neuefische.rem_213_github.backend.model.UserEntity;
 import de.neuefische.rem_213_github.backend.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,4 +48,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
+
+    public Optional<UserEntity> delete(String name) {
+        Optional<UserEntity> optionalUserEntity = userRepository.findByName(name);
+        if (optionalUserEntity.isPresent()) {
+            userRepository.delete(optionalUserEntity.get());
+        }
+        return optionalUserEntity;
+    }
 }
